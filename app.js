@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const index = require("./routes");
+const errohandler = require("errorhandler");
 require("./database");
 
 const app = express();
@@ -17,4 +18,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(index);
 
+if (process.env.NODE_ENV === "development") {
+  app.use(errohandler());
+} else {
+  app.use((err, req, res, next) => {
+    const code = err.code || 500;
+    res.status(code).json({
+      code: code,
+      message: code === 500 ? null : err.message,
+    });
+  });
+}
 app.listen(port);

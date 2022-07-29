@@ -1,17 +1,10 @@
 const router = require("express").Router();
-const api = require("./api");
-const Actu = require("../database/models/actu.model");
+const actus = require("./actus");
 
-router.use("/api", api);
-
-router.get("/actu/new", (req, res) => {
-  res.render("actu/actu-form");
-});
+router.use("/actu", actus);
 
 router.get("/", (req, res) => {
-  Actu.find({})
-    .exec()
-    .then((actus) => res.render("actu/actu-list", { actus }));
+  res.redirect("/actu");
 });
 
 module.exports = router;

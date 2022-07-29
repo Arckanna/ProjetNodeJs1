@@ -1,11 +1,5 @@
-extends ../layout.pug 
-
-block content 
-    div(class="d-flex flex-row content mx-auto")
-        div(class="profile-container ") 
-            include ../includes/profile.pug
-        div(class="flex-fill d-flex flex-column") 
-            if actus 
-                each actu in actus
-                    div(class="card actu-element mt-2")
-                        div(class='card-body ')= actu.content
+if actus 
+    each actu in actus
+        div(class="card actu-element mt-2")
+            div(class='card-body ')= actu.content
+            button(class="btn btn-danger mt-2 float-right" actuid=actu._id) X
