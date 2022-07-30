@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 const actuSchema = schema({
   content: {
     type: String,
-    maxlength: [140, "Actu trop longue"],
+    maxlength: [250, "Actu trop longue"],
     minlength: [10, "trop court"],
     required: [true, "requis"],
   },

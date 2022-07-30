@@ -12,3 +12,9 @@ exports.createActu = (actu) => {
 exports.deleteActu = (actuId) => {
   return Actu.findByIdAndDelete(actuId).exec();
 };
+
+exports.getActu = (actuId) => {
+  return Actu.findOne({ _id: actuId }).exec();
+};
+
+//exports.updateActu = actuId);

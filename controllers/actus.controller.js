@@ -2,6 +2,7 @@ const {
   getActus,
   createActu,
   deleteActu,
+  getActu,
 } = require("../queries/actus.queries");
 
 exports.actuList = async (req, res, next) => {
@@ -34,6 +35,16 @@ exports.actuDelete = async (req, res, next) => {
     await deleteActu(actuId);
     const actus = await getActus();
     res.render("actu/actu-list", { actus });
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.actuEdit = async (req, res, next) => {
+  try {
+    const actuId = req.params.actuId;
+    const actu = await getActu(actuId);
+    res.render("actu/actu-form", { actu });
   } catch (e) {
     next(e);
   }

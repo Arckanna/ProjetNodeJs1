@@ -1,5 +1,6 @@
 if actus 
     each actu in actus
         div(class="card actu-element mt-2")
-            div(class='card-body ')= actu.content
-            button(class="btn btn-danger mt-2 float-right" actuid=actu._id) X
+            div(class='card-body')
+                a(class ="card-text" href="/actu/edit/" + actu._id)= actu.content
+                button(class="btn btn-danger mt-2 float-end" actuid=actu._id) X

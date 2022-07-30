@@ -10,7 +10,7 @@ function bindActu() {
     e.addEventListener("click", ($event) => {
       const actuId = $event.target.getAttribute("actuid");
       axios
-        .delete("/actu/" + actuId)
+        .delete(`/actu/${actuId}`)
         .then(function (response) {
           actuContainer.innerHTML = response.data;
           bindActu();
