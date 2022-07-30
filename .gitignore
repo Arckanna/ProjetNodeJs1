@@ -1,2 +1,4 @@
 # Ignore all files in the 'node_module' subfolder.
 /node_modules/
+# Ignore files
+/database/index.js/
