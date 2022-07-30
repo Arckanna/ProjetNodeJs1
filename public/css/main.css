@@ -24,3 +24,6 @@
  .actu-element:first-child{
     border-top:1px solid #ddd;
  }
+ .logo {
+    border-radius: 10px;
+ }
