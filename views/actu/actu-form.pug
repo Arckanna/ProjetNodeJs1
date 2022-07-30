@@ -5,11 +5,11 @@ block content
         div(class="profile-container ")
             include ../includes/profile
         div(class="flex-fill ")
-            form(action="/actu" method="post" class="card")
+            form(method="post" class="card" action=actu && actu._id ? "/actu/update/" + actu._id : "/actu" )
                 div(class="card-header") Ecrivez une actu &#128526;
                 div(class="card-body")
                     .form-group 
-                        textarea(class="form-control" name="content" placeholder="Quoi de nouveau ?")= actu.content
+                        textarea(class="form-control" name="content" placeholder="Quoi de nouveau ?")= actu && actu.content
                     if errors
                         ul(class="my-2")
                             each error in errors 

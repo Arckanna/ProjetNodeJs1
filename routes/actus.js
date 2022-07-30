@@ -5,6 +5,7 @@ const {
   actuCreate,
   actuDelete,
   actuEdit,
+  actuUpdate,
 } = require("../controllers/actus.controller");
 const Actu = require("../database/models/actu.model");
 
@@ -17,5 +18,7 @@ router.post("/", actuCreate);
 router.get("/edit/:actuId", actuEdit);
 
 router.delete("/:actuId", actuDelete);
+
+router.post("/update/:actuId", actuUpdate);
 
 module.exports = router;

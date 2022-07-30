@@ -17,4 +17,12 @@ exports.getActu = (actuId) => {
   return Actu.findOne({ _id: actuId }).exec();
 };
 
-//exports.updateActu = actuId);
+exports.updateActu = (actuId, actu) => {
+  return Actu.findByIdAndUpdate(
+    actuId,
+    {
+      $set: actu,
+    },
+    { runValidators: true }
+  );
+};
