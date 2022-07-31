@@ -6,6 +6,8 @@ const errohandler = require("errorhandler");
 require("./database");
 
 const app = express();
+exports.app = app;
+
 const port = process.env.PORT || 3000;
 
 app.set("views", path.join(__dirname, "views"));
