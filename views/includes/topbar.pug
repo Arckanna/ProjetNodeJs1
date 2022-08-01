@@ -5,9 +5,13 @@ navbar(class="navbar navbar-expand-lg navbar-light bg-light")
         span(class="navbar-toggler-icon")
     div(class="collapse navbar-collapse flex-row-reverse")
         ul(class="navbar-nav me-5 pe-5")
-            li(class="nav-item active me-5 pe-5")
-                a(class="btn btn-primary btn-actu me-5 " href="/actu/new") Ecrire une actu &#128522;
-            li(class="nav-item ")   
-                a(class="nav-link me-5" href="/auth/signin/form") Connexion
-            li(class="nav-item ")   
-                a(class="nav-link me-5" href="/users/signup/form") Inscription
+            if isAuthenticated
+                li(class="nav-item active me-5 pe-5")
+                    a(class="btn btn-primary btn-actu me-5 " href="/actu/new") Ecrire une actu &#128522;
+                li(class="nav-item active")
+                    a(class="nav-link" href="/auth/signout") Déconnexion
+            else
+                li(class="nav-item ")   
+                    a(class="nav-link me-5" href="/auth/signin/form") Connexion
+                li(class="nav-item ")   
+                    a(class="nav-link me-5" href="/users/signup/form") Inscription

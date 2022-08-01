@@ -12,12 +12,13 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await findUserPerId;
+    const user = await findUserPerId(id);
     done(null, user);
   } catch (e) {
     done(e);
   }
 });
+
 passport.use(
   "local",
   new LocalStrategy(
@@ -32,12 +33,10 @@ passport.use(
           if (match) {
             done(null, user);
           } else {
-            done(null, false, {
-              message: "Vos identifiants ne sont pas corrects",
-            });
+            done(null, false, { message: "Wrong password" });
           }
         } else {
-          done(null, false, { messsage: "Utilisateur non reconnu" });
+          done(null, false, { message: "User not found" });
         }
       } catch (e) {
         done(e);
