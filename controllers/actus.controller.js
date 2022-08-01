@@ -9,20 +9,28 @@ const {
 exports.actuList = async (req, res, next) => {
   try {
     const actus = await getActus();
-    res.render("actu/actu", { actus });
+    res.render("actu/actu", {
+      actus,
+      isAuthenticated: req.isAuthenticated(),
+      currentUser: req.user,
+    });
   } catch (e) {
     next(e);
   }
 };
 
 exports.actuNew = (req, res, next) => {
-  res.render("actu/actu-form", { actu: {} });
+  res.render("actu/actu-form", {
+    actu: {},
+    isAuthenticated: req.isAuthenticated(),
+    currentUser: req.user,
+  });
 };
 
 exports.actuCreate = async (req, res, next) => {
   try {
     const body = req.body;
-    await createActu(body);
+    await createActu({ ...body, author: req.user._id });
     res.redirect("/actu");
   } catch (e) {
     const errors = Object.keys(e.errors).map((key) => e.errors[key].message);
@@ -45,7 +53,11 @@ exports.actuEdit = async (req, res, next) => {
   try {
     const actuId = req.params.actuId;
     const actu = await getActu(actuId);
-    res.render("actu/actu-form", { actu });
+    res.render("actu/actu-form", {
+      actu,
+      isAuthenticated: req.isAuthenticated(),
+      currentUser: req.user,
+    });
   } catch (e) {
     next(e);
   }
@@ -60,6 +72,11 @@ exports.actuUpdate = async (req, res, next) => {
   } catch (e) {
     const errors = Object.keys(e.errors).map((key) => e.errors[key].message);
     const actu = await getActu(actuId);
-    res.status(400).render("actu/actu-form", { errors, actu });
+    res.status(400).render("actu/actu-form", {
+      errors,
+      actu,
+      isAuthenticated: req.isAuthenticated(),
+      currentUser: req.user,
+    });
   }
 };

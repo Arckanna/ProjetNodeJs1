@@ -8,6 +8,7 @@ const actuSchema = schema({
     minlength: [10, "trop court"],
     required: [true, "requis"],
   },
+  author: { type: schema.Types.ObjectId, ref: "user", required: true },
 });
 
 const Actu = mongoose.model("actu", actuSchema);
