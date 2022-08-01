@@ -1,1 +1,17 @@
-h3 Profil :
+div(class="profile-container bg-white mr-3 d-flex flex-column")
+    div(class="d-flex flex-row justify-content-center align-items-center mt-3" action="/users/update/image" method="post" enctype="multipart/form-data" )
+      input(type="file" name="avatar" class="d-none")
+      img(src="images/Ile.jpg" class="img-fluid")
+    div(class="d-flex flex-row justify-content-center align-items-center mt-3")
+      p= `${ currentUser.username } (${ currentUser.local.email })`
+    div(class="text-center d-flex flex-row justify-content-center align-items-center mt-3")
+      div(class="flex-fill")
+        p
+          strong Actu
+          br
+          span(class="text-primary")= actus && actus.length ? actus.length : "-"
+      div(class="flex-fill")
+        p
+          strong Following
+          br
+          span(class="text-primary") -
