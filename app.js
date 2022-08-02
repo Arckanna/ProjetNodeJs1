@@ -6,8 +6,7 @@ const errorHandler = require("errorhandler");
 require("./database");
 
 const app = express();
-exports.app = app;
-const port = process.env.PORT || 3000;
+module.exports = app;
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -21,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(index);
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "dev") {
   app.use(errorHandler());
 } else {
   app.use((err, req, res, next) => {
@@ -32,5 +31,3 @@ if (process.env.NODE_ENV === "development") {
     });
   });
 }
-
-app.listen(port);
