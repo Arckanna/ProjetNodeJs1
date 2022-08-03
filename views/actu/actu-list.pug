@@ -1,9 +1,13 @@
 if actus 
     each actu in actus
         div(class="card actu-element mt-2")
+            div(class='card-body ')
+                img(width="30" height="30"  src=actu.author.avatar)
+                span(class="flex-fill ms-3")= actu.author.username
+
             div(class='card-body row')
                 div(class ="card-text col-md-9" )= actu.content
-                a(class="btn btn-success col-md-1 mt-2 ms-5 " href="/actu/edit/" + actu._id)
+                a(class="btn btn-success col-md-1 mt-2 ms-3 " href="/actu/edit/" + actu._id)
                     i(class="fa-solid fa-pencil")                
                 button(class="btn btn-danger col-md-1 mt-2 ms-2 " actuid=actu._id) 
                     i(class="fa-solid fa-trash")

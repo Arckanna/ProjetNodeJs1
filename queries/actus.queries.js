@@ -26,3 +26,15 @@ exports.updateActu = (actuId, actu) => {
     { runValidators: true }
   );
 };
+
+exports.getCurrentUserActusWithFollowing = (user) => {
+  return Actu.find({
+    author: { $in: [...user.following, user._id] },
+  })
+    .populate("author")
+    .exec();
+};
+
+exports.getUserActusFromUsername = (authorId) => {
+  return Actu.find({ author: authorId }).populate("author").exec();
+};

@@ -4,15 +4,17 @@ const {
   deleteActu,
   getActu,
   updateActu,
+  getCurrentUserActusWithFollowing,
 } = require("../queries/actus.queries");
 
 exports.actuList = async (req, res, next) => {
   try {
-    const actus = await getActus();
+    const actus = await getCurrentUserActusWithFollowing(req.user);
     res.render("actu/actu", {
       actus,
       isAuthenticated: req.isAuthenticated(),
       currentUser: req.user,
+      user: req.user,
     });
   } catch (e) {
     next(e);
