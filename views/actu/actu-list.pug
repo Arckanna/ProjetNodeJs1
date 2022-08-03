@@ -4,7 +4,7 @@ if actus
             div(class='card-body ')
                 img(width="30" height="30"  src=actu.author.avatar)
                 span(class="flex-fill ms-3")= actu.author.username
-            if editable && actu.author_id.toString() === currentUser._id.toString()
+            if editable && actu.author._id.toString() === currentUser._id.toString()
                 div(class='card-body row')
                     div(class ="card-text col-md-9" )= actu.content
                     a(class="btn btn-success col-md-1 mt-2 ms-3 " href="/actu/edit/" + actu._id)

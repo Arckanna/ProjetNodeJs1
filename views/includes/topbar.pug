@@ -1,17 +1,29 @@
+script(src="/javascripts/search-bar.js") 
 navbar(class="navbar navbar-expand-lg navbar-light bg-white")
     a(class="navbar-brand ms-3" href="/actu")
         img(class="logo" width="50" height="50" src="/images/ile.jpg")
     button(class="navbar-toggler")
         span(class="navbar-toggler-icon")
-    div(class="collapse navbar-collapse flex-row-reverse")
-        ul(class="navbar-nav me-5 pe-5")
-            if isAuthenticated
-                li(class="nav-item active me-5 pe-5")
-                    a(class="btn btn-primary btn-actu me-5 " href="/actu/new") Ecrire une actu &#128522;
-                li(class="nav-item active")
-                    a(class="nav-link" href="/auth/signout") Déconnexion
-            else
-                li(class="nav-item ")   
-                    a(class="nav-link me-5" href="/auth/signin/form") Connexion
-                li(class="nav-item ")   
-                    a(class="nav-link me-5" href="/users/signup/form") Inscription
+    div(class="collapse navbar-collapse flex-row")
+        
+        if isAuthenticated
+            form
+                input(type="text" class="form-control ms-3 me-5" placeholder="search" id="search-input")
+                div(id="search-menu-container")
+                    div(class="search-menu d-flex flex-column")
+                        div(class="d-flex flex-row align-item-center search-menu-item pointer-cursor")
+                            img(width="30" height="30" class="p-2" src="/images/default-profile.svg")
+                            span username 
+            div(class="collapse navbar-collapse flex-row-reverse")
+                ul(class="navbar-nav me-5 pe-5")
+                    li(class="nav-item active me-2 pe-2")
+                        a(class="btn btn-primary btn-actu me-2 " href="/actu/new") Ecrire une actu &#128522;
+                    li(class="nav-item active me-2 pe-2")
+                        a(class="nav-link ms-5" href="/auth/signout") Déconnexion
+        else
+            div(class="collapse navbar-collapse flex-row-reverse")
+                ul(class="navbar-nav me-5 pe-5")
+                    li(class="nav-item ")   
+                        a(class="nav-link me-2" href="/auth/signin/form") Connexion
+                    li(class="nav-item ")   
+                        a(class="nav-link ms-5" href="/users/signup/form") Inscription
