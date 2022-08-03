@@ -38,3 +38,6 @@ exports.getCurrentUserActusWithFollowing = (user) => {
 exports.getUserActusFromUsername = (authorId) => {
   return Actu.find({ author: authorId }).populate("author").exec();
 };
+exports.getUserTweetsFormAuthorId = (authorId) => {
+  return Tweet.find({ author: authorId }).populate("author").exec();
+};

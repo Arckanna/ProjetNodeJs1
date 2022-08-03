@@ -15,6 +15,7 @@ exports.actuList = async (req, res, next) => {
       isAuthenticated: req.isAuthenticated(),
       currentUser: req.user,
       user: req.user,
+      editable: true,
     });
   } catch (e) {
     next(e);
@@ -44,8 +45,12 @@ exports.actuDelete = async (req, res, next) => {
   try {
     const actuId = req.params.actuId;
     await deleteActu(actuId);
-    const actus = await getActus();
-    res.render("actu/actu-list", { actus });
+    const actus = await getCurrentUserActusWithFollowing();
+    res.render("actu/actu-list", {
+      actus,
+      currentUser: req.user,
+      editable: true,
+    });
   } catch (e) {
     next(e);
   }

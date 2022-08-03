@@ -4,11 +4,11 @@ if actus
             div(class='card-body ')
                 img(width="30" height="30"  src=actu.author.avatar)
                 span(class="flex-fill ms-3")= actu.author.username
-
-            div(class='card-body row')
-                div(class ="card-text col-md-9" )= actu.content
-                a(class="btn btn-success col-md-1 mt-2 ms-3 " href="/actu/edit/" + actu._id)
-                    i(class="fa-solid fa-pencil")                
-                button(class="btn btn-danger col-md-1 mt-2 ms-2 " actuid=actu._id) 
-                    i(class="fa-solid fa-trash")
+            if editable && actu.author_id.toString() === currentUser._id.toString()
+                div(class='card-body row')
+                    div(class ="card-text col-md-9" )= actu.content
+                    a(class="btn btn-success col-md-1 mt-2 ms-3 " href="/actu/edit/" + actu._id)
+                        i(class="fa-solid fa-pencil")                
+                    button(class="btn btn-danger col-md-1 mt-2 ms-2 " actuid=actu._id) 
+                        i(class="fa-solid fa-trash")
                 
