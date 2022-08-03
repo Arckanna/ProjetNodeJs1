@@ -1,0 +1,10 @@
+
+
+div(class="search-menu d-flex flex-column")
+    if users && users.length 
+        each user in users
+            div(class="d-flex flex-row align-item-center  search-menu-item pointer-cursor" href="/users/" + user.username )
+                img(width="45" height="45" class="imgAvatar ms-1 me-2" src=user.avatar)
+                span(class="userSpan")= user.username 
+    else 
+        span(class="ps-3") Aucun utilisateur trouvé

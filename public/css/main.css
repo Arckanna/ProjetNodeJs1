@@ -75,5 +75,12 @@
     cursor: pointer;
   }
   
+  .imgAvatar{
+    border-radius: 20px;
+  }
+
+  .userSpan{
+    padding-top: 2vh;
+  }
 
   

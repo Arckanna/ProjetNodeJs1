@@ -4,16 +4,12 @@ navbar(class="navbar navbar-expand-lg navbar-light bg-white")
         img(class="logo" width="50" height="50" src="/images/ile.jpg")
     button(class="navbar-toggler")
         span(class="navbar-toggler-icon")
-    div(class="collapse navbar-collapse flex-row")
-        
+    div(class="collapse navbar-collapse flex-row")        
         if isAuthenticated
             form
                 input(type="text" class="form-control ms-3 me-5" placeholder="search" id="search-input")
                 div(id="search-menu-container")
-                    div(class="search-menu d-flex flex-column")
-                        div(class="d-flex flex-row align-item-center search-menu-item pointer-cursor")
-                            img(width="30" height="30" class="p-2" src="/images/default-profile.svg")
-                            span username 
+                   
             div(class="collapse navbar-collapse flex-row-reverse")
                 ul(class="navbar-nav me-5 pe-5")
                     li(class="nav-item active me-2 pe-2")

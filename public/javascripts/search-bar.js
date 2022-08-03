@@ -20,11 +20,10 @@ window.addEventListener("DOMContentLoaded", () => {
       clearTimeout(ref);
     }
     ref = setTimeout(() => {
-      console.log(value);
       axios
-        .get("/users?search =" + value)
+        .get("/users?search=" + value)
         .then((response) => {
-          console.log(response);
+          menuContainer.innerHTML = response.data;
         })
         .catch((err) => {
           console.log(err);
