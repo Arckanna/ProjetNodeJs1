@@ -2,6 +2,9 @@ const {
   createUser,
   findUserPerUsername,
   searchUsersPerUsername,
+  addUserIdToCurrentUserFollowing,
+  findUserPerId,
+  removeUserIdToCurrentUserFollowing,
 } = require("../queries/users.queries");
 const { getUserActusFormAuthorId } = require("../queries/actus.queries");
 const path = require("path");
@@ -16,6 +19,33 @@ const upload = multer({
     },
   }),
 });
+
+exports.userList = async (req, res, next) => {
+  try {
+    const search = req.query.search;
+    const users = await searchUsersPerUsername(search);
+    res.render("includes/search-menu", { users });
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.userProfile = async (req, res, next) => {
+  try {
+    const username = req.params.username;
+    const user = await findUserPerUsername(username);
+    const actus = await getUserActusFormAuthorId(user._id);
+    res.render("actu/actu", {
+      actus,
+      isAuthenticated: req.isAuthenticated(),
+      currentUser: req.user,
+      user,
+      editable: false,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
 
 exports.signupForm = (req, res, next) => {
   res.render("users/user-form", {
@@ -53,29 +83,27 @@ exports.uploadImage = [
   },
 ];
 
-exports.userProfile = async (req, res, next) => {
+exports.followUser = async (req, res, next) => {
   try {
-    const username = req.params.username;
-    const user = await findUserPerUsername(username);
-    const actus = await getUserActusFormAuthorId(user._id);
-    res.render("actu/actu"),
-      {
-        actus,
-        isAuthenticated: req.isAuthenticated(),
-        currentUser: req.user,
-        user,
-        editable: false,
-      };
+    const userId = req.params.userId;
+    const [, user] = await Promise.all([
+      addUserIdToCurrentUserFollowing(req.user, userId),
+      findUserPerId(userId),
+    ]);
+    res.redirect(`/users/${user.username}`);
   } catch (e) {
     next(e);
   }
 };
 
-exports.userList = async (req, res, next) => {
+exports.unFollowUser = async (req, res, next) => {
   try {
-    const search = req.query.search;
-    const users = await searchUsersPerUsername(search);
-    res.render("includes/search-menu", { users });
+    const userId = req.params.userId;
+    const [, user] = await Promise.all([
+      removeUserIdToCurrentUserFollowing(req.user, userId),
+      findUserPerId(userId),
+    ]);
+    res.redirect(`/users/${user.username}`);
   } catch (e) {
     next(e);
   }

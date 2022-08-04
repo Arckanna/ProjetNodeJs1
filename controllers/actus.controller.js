@@ -37,7 +37,13 @@ exports.actuCreate = async (req, res, next) => {
     res.redirect("/actu");
   } catch (e) {
     const errors = Object.keys(e.errors).map((key) => e.errors[key].message);
-    res.status(400).render("actu/actu-form", { errors });
+    res
+      .status(400)
+      .render("actu/actu-form", {
+        errors,
+        isAuthenticated: req.isAuthenticated(),
+        currentUser: req.user,
+      });
   }
 };
 
