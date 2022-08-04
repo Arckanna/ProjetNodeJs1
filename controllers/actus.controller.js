@@ -37,13 +37,11 @@ exports.actuCreate = async (req, res, next) => {
     res.redirect("/actu");
   } catch (e) {
     const errors = Object.keys(e.errors).map((key) => e.errors[key].message);
-    res
-      .status(400)
-      .render("actu/actu-form", {
-        errors,
-        isAuthenticated: req.isAuthenticated(),
-        currentUser: req.user,
-      });
+    res.status(400).render("actu/actu-form", {
+      errors,
+      isAuthenticated: req.isAuthenticated(),
+      currentUser: req.user,
+    });
   }
 };
 
@@ -51,7 +49,7 @@ exports.actuDelete = async (req, res, next) => {
   try {
     const actuId = req.params.actuId;
     await deleteActu(actuId);
-    const actus = await getCurrentUserActusWithFollowing();
+    const actus = await getCurrentUserActusWithFollowing(req.user);
     res.render("actu/actu-list", {
       actus,
       currentUser: req.user,
